@@ -1,0 +1,65 @@
+#!/bin/sh
+
+#create random numbers between 1-50
+#create a script that picks 5 for each draw
+#add a bonus ball number between 1-10
+# output the numbers to a file that has a date and its name
+# create another script that allows user to check their lottery numbers
+#advise user if they match or not
+#show how many matches they got
+
+
+for i in {1..5}
+do
+  rdom=$((RANDOM %50 + 1))
+  echo $rdom
+done
+
+
+echo "Here are your lottery numbers:"
+
+for (( i=1; i<=5; i++ ))
+do
+   echo -n $(($RANDOM%50+1))
+if [ $i -lt 5 ]
+   then
+      echo -n ", "
+   fi
+done
+
+echo
+echo -n "Bonus Ball: "
+echo $(($RANDOM%10+1))
+
+
+
+echo -n "Please enter your six lottery numbers: "
+read -a numbers
+
+
+echo -n "Please enter the winning lottery numbers: "
+read -a winning
+
+#Set the counter to 0
+matches=0
+
+
+for n in "${numbers[@]}"
+do
+        #Loop through the array of winning numbers
+        for w in "${winning[@]}"
+        do
+                #If the numbers match, increase the counter by 1
+                if [ "$n" = "$w" ]
+                then
+                        matches=$((matches+1))
+                fi
+        done
+done
+
+echo "You have $matches matches!"
+
+
+
+
+
