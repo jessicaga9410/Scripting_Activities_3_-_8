@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# Prompt the user for a series of 5-10 integers
+echo "Enter 5-10 integers (type 'done' to stop):"
+
+# Initialize the count and sum variables
+count=0
+sum=0
+product=1
+min=0
+max=0
+
+# Loop until the user enters 'done'
+while true; do
+  # Read the user input
+  read n
+
+  # If the input is 'done', break the loop
+  if [ "$n" = "done" ]; then
+    break
+  fi
+
+  # Increment the count
+ count=$((count+1))
+
+  # Calculate the sum
+  sum=$((sum+n))
+
+  # Calculate the product
+  product=$((product*n))
+
+  # Calculate the min
+  if [ $count = 1 ]; then
+    min=$n
+  else
+    if [ $n -lt $min ]; then
+      min=$n
+    fi
+  fi
+
+  # Calculate the max
+  if [ $count = 1 ]; then
+    max=$n
+  else
+ if [ $n -gt $max ]; then
+      max=$n
+    fi
+  fi
+
+  # Exit the loop if the count reaches 10
+  if [ $count -eq 10 ]; then
+    break
+  fi
+done
+
+# Calculate the average
+average=$(echo "scale=2; $sum/$count" | bc)
+
+# Print the results
+echo "Product: $product"
+echo "Average: $average"
+echo "Sum: $sum"
+echo "Min: $min"
+echo "Max: $max"
+# Print results
+echo "The product of the integers is $product"
+echo "The average of the integers is $average"
+echo "The sum of the integers is $sum"
+echo "The minimum of the integers is $min"
+echo "The maximum of the integers is $max"
+                                               
